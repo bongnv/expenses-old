@@ -1,10 +1,12 @@
 <template>
   <v-container fill-width>
     <v-row align="center" justify="center">
-      <v-col cols="10">
+      <v-col cols="11">
         <v-form ref="form" v-model="valid" :lazy-validation="lazy" class="justify-center">
-          <SimpleDropdown v-model="category" name="Category" :items="categories"></SimpleDropdown>
+          <DatePicker v-model="date" />
+
           <SimpleDropdown v-model="currency" name="Currency" :items="currencies"></SimpleDropdown>
+          <SimpleDropdown v-model="category" name="Category" :items="categories"></SimpleDropdown>
           <v-text-field
             v-model="amount"
             :counter="amountLength"
@@ -37,12 +39,14 @@
 
 <script>
 import SimpleDropdown from "@/components/SimpleDropdown.vue";
+import DatePicker from "@/components/DatePicker.vue";
 import categories from "@/data/categories.json";
 import currencies from "@/data/currencies.json";
 
 // data, amount, category, account, note, currency, category group
 export default {
   data: vm => ({
+    date: new Date().toISOString().substr(0, 10),
     valid: true,
     noteLength: 64,
     note: "",
@@ -50,7 +54,7 @@ export default {
       v =>
         !v ||
         v.length <= vm.noteLength ||
-        "Name must not be more than " + vm.noteLength + " characters"
+        "Note must not be more than " + vm.noteLength + " characters"
     ],
     amount: 0,
     amountLength: 20,
@@ -58,7 +62,7 @@ export default {
       v => !!v || "Amount is required",
       v => v > 0 || "Amount must be valid"
     ],
-    category: "1",
+    category: "",
     currency: "SGD",
     categories,
     currencies,
@@ -66,7 +70,8 @@ export default {
   }),
 
   components: {
-    SimpleDropdown
+    SimpleDropdown,
+    DatePicker
   },
 
   methods: {
