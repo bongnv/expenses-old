@@ -12,7 +12,7 @@
       <v-text-field
         :value="value"
         @input="update"
-        label="Month"
+        label="Date"
         prepend-icon="mdi-calendar"
         v-on="on"
         @keyup.enter="onEnter"
