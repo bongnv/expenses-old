@@ -1,12 +1,12 @@
 <template>
   <MainLayout>
-    <v-container id="expenses" class="fill-height" justify="center" fluid>
-      <v-row no-gutters>
+    <v-container id="expenses" class="fill-height" fluid>
+      <v-row class="fill-height" no-gutters>
         <v-col>
-          <ExpenseForm class="expense-form" />
+          <ExpenseForm class="expense-form" style="width: 90%"/>
         </v-col>
-        <v-col v-if="$vuetify.breakpoint.lgAndUp">
-          <v-alert type="info">This is under construction.</v-alert>
+        <v-col v-if="$vuetify.breakpoint.lgAndUp" class="fill-height">
+          <ListTransactions class="fill-height"/>
         </v-col>
       </v-row>
     </v-container>
@@ -17,19 +17,14 @@
 // @ is an alias to /src
 import MainLayout from "@/layouts/MainLayout.vue";
 import ExpenseForm from "@/components/ExpenseForm.vue";
+import ListTransactions from "@/components/ListTransactions.vue";
 
 export default {
   name: "Home",
   components: {
     MainLayout,
-    ExpenseForm
+    ExpenseForm,
+    ListTransactions
   }
 };
 </script>
-
-<style scoped>
-.expense-form {
-  width: 90%;
-}
-</style>
-

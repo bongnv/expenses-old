@@ -55,7 +55,7 @@
         </v-avatar>
       </v-btn>
     </v-app-bar>
-    <v-content>
+    <v-content style="height:100vh">
       <slot />
     </v-content>
   </v-app>
@@ -100,7 +100,7 @@ export default {
       { icon: "mdi-settings", text: "Settings" },
       { icon: "mdi-message", text: "Send feedback" },
       { icon: "mdi-help-circle", text: "Help" },
-      { icon: "mdi-cellphone-link", text: "App downloads" },
+      { icon: "mdi-cellphone-link", text: "App downloads" }
     ]
   })
 };
