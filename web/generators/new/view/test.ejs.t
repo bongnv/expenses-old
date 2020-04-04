@@ -1,5 +1,5 @@
 ---
-to: "src/views/<%= h.changeCase.pascalCase(name) %>.unit.js"
+to: "src/views/<%= h.changeCase.pascalCase(name) %>.test.js"
 ---
 <%
   const fileName = h.changeCase.kebab(name)

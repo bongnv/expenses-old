@@ -2,6 +2,15 @@
 to: "src/components/<%= h.changeCase.pascalCase(name) %>.vue"
 ---
 <%
+if (blocks.indexOf('template') !== -1) {
+%>
+<template>
+  <div/>
+</template>
+
+<%
+}
+
 if (blocks.indexOf('script') !== -1) {
 %><script>
 export default {
@@ -14,18 +23,9 @@ export default {
 <%
 }
 
-if (blocks.indexOf('template') !== -1) {
-%>
-<template>
-  <div/>
-</template>
-<%
-}
-
 if (blocks.indexOf('style') !== -1) {
 %>
 <style lang="scss" module>
-@import '@design';
 </style><%
 }
 %>

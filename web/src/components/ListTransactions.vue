@@ -17,7 +17,11 @@
     </v-toolbar>
 
     <v-list class="d-flex flex-column overflow-y-auto">
-      <v-list-item v-for="item in items" :key="item.title" @click="onClick(item)">
+      <v-list-item
+        v-for="item in items"
+        :key="item.title"
+        @click="onClick(item)"
+      >
         <v-list-item-avatar>
           <v-icon :class="[item.iconClass]" v-text="item.icon"></v-icon>
         </v-list-item-avatar>

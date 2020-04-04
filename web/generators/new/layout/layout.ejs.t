@@ -2,17 +2,9 @@
 to: "src/layouts/<%= h.changeCase.pascalCase(name) %>.vue"
 ---
 <template>
-  <div :class="$style.container">
-    <slot />
-  </div>
+  <v-app>
+    <v-content>
+      <slot />
+    </v-content>
+  </v-app>
 </template>
-
-<style lang="scss" module>
-@import '@design';
-
-.container {
-  min-width: $size-content-width-min;
-  max-width: $size-content-width-max;
-  margin: 0 auto;
-}
-</style>

@@ -1,10 +1,23 @@
 <template>
   <v-container fill-width>
-    <v-form ref="form" v-model="valid" :lazy-validation="lazy" class="justify-center">
+    <v-form
+      ref="form"
+      v-model="valid"
+      :lazy-validation="lazy"
+      class="justify-center"
+    >
       <DatePicker v-model="date" />
 
-      <SimpleDropdown v-model="currency" name="Currency" :items="currencies"></SimpleDropdown>
-      <SimpleDropdown v-model="category" name="Category" :items="categories"></SimpleDropdown>
+      <SimpleDropdown
+        v-model="currency"
+        name="Currency"
+        :items="currencies"
+      ></SimpleDropdown>
+      <SimpleDropdown
+        v-model="category"
+        name="Category"
+        :items="categories"
+      ></SimpleDropdown>
       <v-text-field
         v-model="amount"
         :counter="amountLength"
@@ -25,7 +38,9 @@
 
       <v-row>
         <v-spacer />
-        <v-btn :disabled="!valid" class="ma-4" color="success" @click="submit">Submit</v-btn>
+        <v-btn :disabled="!valid" class="ma-4" color="success" @click="submit"
+          >Submit</v-btn
+        >
         <v-spacer />
         <v-btn color="error" class="ma-4" @click="reset">Reset Form</v-btn>
         <v-spacer />

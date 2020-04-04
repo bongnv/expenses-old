@@ -1,5 +1,5 @@
 ---
-to: "src/components/<%= h.changeCase.pascalCase(name) %>.unit.js"
+to: "src/components/<%= h.changeCase.pascalCase(name) %>.test.js"
 ---
 <%
   let fileName = h.changeCase.kebab(name).toLowerCase()
