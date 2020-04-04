@@ -1,39 +1,36 @@
 <template>
   <v-container fill-width>
-    <v-row align="center" justify="center">
-      <v-col cols="11">
-        <v-form ref="form" v-model="valid" :lazy-validation="lazy" class="justify-center">
-          <DatePicker v-model="date" />
+    <v-form ref="form" v-model="valid" :lazy-validation="lazy" class="justify-center">
+      <DatePicker v-model="date" />
 
-          <SimpleDropdown v-model="currency" name="Currency" :items="currencies"></SimpleDropdown>
-          <SimpleDropdown v-model="category" name="Category" :items="categories"></SimpleDropdown>
-          <v-text-field
-            v-model="amount"
-            :counter="amountLength"
-            :rules="amountRules"
-            label="Amount"
-            required
-            placeholder="0"
-            type="number"
-          ></v-text-field>
+      <SimpleDropdown v-model="currency" name="Currency" :items="currencies"></SimpleDropdown>
+      <SimpleDropdown v-model="category" name="Category" :items="categories"></SimpleDropdown>
+      <v-text-field
+        v-model="amount"
+        :counter="amountLength"
+        :rules="amountRules"
+        label="Amount"
+        required
+        placeholder="0"
+        type="number"
+      ></v-text-field>
 
-          <v-text-field
-            v-model="note"
-            :counter="noteLength"
-            :rules="noteRules"
-            label="Note"
-            placeholder="A note on the expense."
-          ></v-text-field>
-          <v-row>
-            <v-spacer />
-            <v-btn :disabled="!valid" class="ma-4" color="success" @click="submit">Submit</v-btn>
-            <v-spacer />
-            <v-btn color="error" class="ma-4" @click="reset">Reset Form</v-btn>
-            <v-spacer />
-          </v-row>
-        </v-form>
-      </v-col>
-    </v-row>
+      <v-text-field
+        v-model="note"
+        :counter="noteLength"
+        :rules="noteRules"
+        label="Note"
+        placeholder="A note on the expense."
+      ></v-text-field>
+
+      <v-row>
+        <v-spacer />
+        <v-btn :disabled="!valid" class="ma-4" color="success" @click="submit">Submit</v-btn>
+        <v-spacer />
+        <v-btn color="error" class="ma-4" @click="reset">Reset Form</v-btn>
+        <v-spacer />
+      </v-row>
+    </v-form>
   </v-container>
 </template>
 
@@ -56,7 +53,7 @@ export default {
         v.length <= vm.noteLength ||
         "Note must not be more than " + vm.noteLength + " characters"
     ],
-    amount: 0,
+    amount: undefined,
     amountLength: 20,
     amountRules: [
       v => !!v || "Amount is required",

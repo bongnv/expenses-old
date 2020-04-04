@@ -1,10 +1,10 @@
 <template>
   <v-container id="expenses" class="fill-height" justify="center" fluid>
-    <v-row>
+    <v-row no-gutters>
       <v-col>
-        <ExpenseForm />
+        <ExpenseForm class="expense-form" />
       </v-col>
-      <v-col>
+      <v-col v-if="$vuetify.breakpoint.lgAndUp">
         <v-alert type="info">This is under construction.</v-alert>
       </v-col>
     </v-row>
@@ -22,3 +22,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.expense-form {
+  width: 90%;
+}
+</style>
