@@ -11,8 +11,9 @@
         :rules="amountRules"
         label="Amount"
         required
-        placeholder=0
+        placeholder="0"
         type="number"
+        @keyup.enter="submit(expense)"
       ></v-text-field>
 
       <v-text-field
@@ -25,12 +26,7 @@
 
       <v-row>
         <v-spacer />
-        <v-btn
-          :disabled="!valid"
-          class="ma-4"
-          color="success"
-          @click="createExpense(expense)"
-        >Submit</v-btn>
+        <v-btn :disabled="!valid" class="ma-4" color="success" @click="submit(expense)">Submit</v-btn>
         <v-spacer />
         <v-btn color="error" class="ma-4" @click="reset">Reset Form</v-btn>
         <v-spacer />
@@ -50,7 +46,8 @@ import { mapActions } from "vuex";
 export default {
   data: vm => ({
     expense: {
-      date: new Date()
+      date: new Date(),
+      currency: "SGD"
     },
     valid: true,
     noteLength: 64,
@@ -79,7 +76,13 @@ export default {
     reset() {
       this.$refs.form.reset();
     },
-    ...mapActions("expenses", ["createExpense"])
+    submit(expense) {
+      this.createExpense(expense).then(() => {
+        this.listExpenses();
+        this.reset();
+      });
+    },
+    ...mapActions("expenses", ["createExpense", "listExpenses"])
   }
 };
 </script>

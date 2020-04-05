@@ -1,22 +1,39 @@
-import { createExpense } from "@/api/expenses";
+import { createExpense, listExpenses, deleteExpense } from "@/api/expenses";
 
 const state = {
   expense: {},
+  expenses: [],
 };
 
 const getters = {}
 
 const actions = {
   createExpense({ commit }, payload) {
-    createExpense(payload).then(item => commit('setExpense', item));
+    return new Promise(resolve => {
+      createExpense(payload).then(
+        item => {
+          commit('setExpense', item);
+          resolve(item);
+        });
+    });
+  },
+
+  listExpenses({ commit }) {
+    listExpenses().then(items => commit('setExpenses', items));
+  },
+
+  deleteExpense(context, id) {
+    return deleteExpense(id);
   }
 }
 
 const mutations = {
   setExpense(state, payload) {
-    console.log("received payload", payload);
-    state.expense = payload
+    state.expense = payload;
   },
+  setExpenses(state, payload) {
+    state.expenses = payload;
+  }
 }
 
 export default {

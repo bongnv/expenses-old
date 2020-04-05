@@ -6,7 +6,7 @@
           <ExpenseForm style="width: 90%" />
         </v-col>
         <v-col v-if="$vuetify.breakpoint.lgAndUp" class="fill-height">
-          <TableExpenses class="fill-height" />
+          <TableExpenses class="fill-height" :items="expenses" />
         </v-col>
       </v-row>
     </v-container>
@@ -15,17 +15,31 @@
 
 <script>
 // @ is an alias to /src
-import MainLayout from "@/layouts/MainLayout.vue";
-import ExpenseForm from "@/components/ExpenseForm.vue";
+import MainLayout from "@/layouts/MainLayout";
+import ExpenseForm from "@/components/ExpenseForm";
 // import ListTransactions from "@/components/ListTransactions.vue";
-import TableExpenses from "@/components/TableExpenses.vue";
+import TableExpenses from "@/components/TableExpenses";
+import { mapActions } from "vuex";
 
 export default {
   name: "Home",
+  computed: {
+    expenses() {
+      return this.$store.state.expenses.expenses;
+    }
+  },
+
   components: {
     MainLayout,
     ExpenseForm,
     TableExpenses
   },
+  methods: {
+    ...mapActions("expenses", ["listExpenses"])
+  },
+
+  mounted: function() {
+    this.listExpenses();
+  }
 };
 </script>

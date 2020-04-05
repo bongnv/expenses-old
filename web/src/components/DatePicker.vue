@@ -46,8 +46,10 @@ export default {
   },
 
   props: {
-    value: Date,
-    default: new Date()
+    value: {
+      type: Date,
+      default: () => (new Date()),
+    }
   },
 
   methods: {

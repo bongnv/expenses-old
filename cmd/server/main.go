@@ -15,6 +15,7 @@ func main() {
 		gokitServer.WithHTTPAddress(":8080"),
 		gokitServer.WithCORS(cors.Options{
 			AllowedOrigins: []string{"http://localhost:8081"},
+			AllowedMethods: []string{"GET", "POST", "PUT", "DELETE"},
 		}),
 	}
 

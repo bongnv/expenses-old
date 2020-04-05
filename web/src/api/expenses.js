@@ -13,3 +13,15 @@ export function createExpense(payload) {
       .catch(error => reject(error));
   });
 }
+
+export function listExpenses() {
+  return new Promise((resolve, reject) => {
+    axios.get(appConfig.apiServer + "expenses")
+      .then(response => resolve(response.data.expenses))
+      .catch(error => reject(error));
+  });
+}
+
+export function deleteExpense (id) {
+  return axios.delete(appConfig.apiServer + "expenses/" + id);
+}
