@@ -3,7 +3,7 @@
     <v-container id="expenses" class="fill-height" fluid>
       <v-row class="fill-height" no-gutters>
         <v-col>
-          <ExpenseForm class="expense-form" style="width: 90%" />
+          <ExpenseForm style="width: 90%" />
         </v-col>
         <v-col v-if="$vuetify.breakpoint.lgAndUp" class="fill-height">
           <TableExpenses class="fill-height" />
@@ -26,6 +26,6 @@ export default {
     MainLayout,
     ExpenseForm,
     TableExpenses
-  }
+  },
 };
 </script>

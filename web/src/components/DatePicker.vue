@@ -10,36 +10,49 @@
   >
     <template v-slot:activator="{ on }">
       <v-text-field
-        :value="value"
-        @input="update"
+        v-model="date"
         label="Date"
         prepend-icon="mdi-calendar"
         v-on="on"
         @keyup.enter="onEnter"
+        :rules="rules"
       ></v-text-field>
     </template>
-    <v-date-picker :value="value" @input="update" no-title scrollable />
+    <v-date-picker v-model="date" no-title scrollable />
   </v-menu>
 </template>
 
 <script>
+const validateDate = v => v && v.length == 10 && !isNaN(Date.parse(v));
 export default {
   data: () => ({
     menu: false,
-    modal: false
+    valid: false,
+    rules: [v => validateDate(v) || "Date is invalid."]
   }),
 
+  computed: {
+    date: {
+      get() {
+        return this.value.toISOString().substr(0, 10);
+      },
+
+      set(newDate) {
+        if (validateDate(newDate)) {
+          this.$emit("input", new Date(newDate));
+        }
+      }
+    }
+  },
+
   props: {
-    value: String,
-    default: new Date().toISOString().substr(0, 10)
+    value: Date,
+    default: new Date()
   },
 
   methods: {
     onEnter() {
       this.menu = false;
-    },
-    update(newValue) {
-      this.$emit("input", newValue);
     }
   }
 };

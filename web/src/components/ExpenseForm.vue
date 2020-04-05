@@ -1,25 +1,12 @@
 <template>
   <v-container fill-width>
-    <v-form
-      ref="form"
-      v-model="valid"
-      :lazy-validation="lazy"
-      class="justify-center"
-    >
-      <DatePicker v-model="date" />
+    <v-form ref="form" v-model="valid" :lazy-validation="lazy" class="justify-center">
+      <DatePicker v-model="expense.date" />
 
-      <SimpleDropdown
-        v-model="currency"
-        name="Currency"
-        :items="currencies"
-      ></SimpleDropdown>
-      <SimpleDropdown
-        v-model="category"
-        name="Category"
-        :items="categories"
-      ></SimpleDropdown>
+      <SimpleDropdown v-model="expense.currency" name="Currency" :items="currencies"></SimpleDropdown>
+      <SimpleDropdown v-model="expense.category" name="Category" :items="categories"></SimpleDropdown>
       <v-text-field
-        v-model="amount"
+        v-model="expense.amount"
         :counter="amountLength"
         :rules="amountRules"
         label="Amount"
@@ -29,7 +16,7 @@
       ></v-text-field>
 
       <v-text-field
-        v-model="note"
+        v-model="expense.note"
         :counter="noteLength"
         :rules="noteRules"
         label="Note"
@@ -38,9 +25,12 @@
 
       <v-row>
         <v-spacer />
-        <v-btn :disabled="!valid" class="ma-4" color="success" @click="submit"
-          >Submit</v-btn
-        >
+        <v-btn
+          :disabled="!valid"
+          class="ma-4"
+          color="success"
+          @click="createExpense(expense)"
+        >Submit</v-btn>
         <v-spacer />
         <v-btn color="error" class="ma-4" @click="reset">Reset Form</v-btn>
         <v-spacer />
@@ -50,32 +40,31 @@
 </template>
 
 <script>
-import SimpleDropdown from "@/components/SimpleDropdown.vue";
-import DatePicker from "@/components/DatePicker.vue";
+import SimpleDropdown from "@/components/SimpleDropdown";
+import DatePicker from "@/components/DatePicker";
 import categories from "@/data/categories.json";
 import currencies from "@/data/currencies.json";
+import { mapActions } from "vuex";
 
 // data, amount, category, account, note, currency, category group
 export default {
   data: vm => ({
-    date: new Date().toISOString().substr(0, 10),
+    expense: {
+      date: new Date()
+    },
     valid: true,
     noteLength: 64,
-    note: "",
     noteRules: [
       v =>
         !v ||
         v.length <= vm.noteLength ||
         "Note must not be more than " + vm.noteLength + " characters"
     ],
-    amount: undefined,
     amountLength: 20,
     amountRules: [
       v => !!v || "Amount is required",
       v => v > 0 || "Amount must be valid"
     ],
-    category: "",
-    currency: "SGD",
     categories,
     currencies,
     lazy: false
@@ -90,9 +79,7 @@ export default {
     reset() {
       this.$refs.form.reset();
     },
-    submit() {
-      this.$refs.form.resetValidation();
-    }
+    ...mapActions("expenses", ["createExpense"])
   }
 };
 </script>
