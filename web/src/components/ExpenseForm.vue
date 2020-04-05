@@ -6,12 +6,12 @@
       <SimpleDropdown v-model="expense.currency" name="Currency" :items="currencies"></SimpleDropdown>
       <SimpleDropdown v-model="expense.category" name="Category" :items="categories"></SimpleDropdown>
       <v-text-field
-        v-model="expense.amount"
+        v-model.number="expense.amount"
         :counter="amountLength"
         :rules="amountRules"
         label="Amount"
         required
-        placeholder="0"
+        placeholder=0
         type="number"
       ></v-text-field>
 

@@ -35,10 +35,17 @@ func (i *implExpenseHandler) Get(ctx context.Context, req *expenses.GetExpenseRe
 }
 
 func (i *implExpenseHandler) List(ctx context.Context, req *expenses.ListExpenseRequest) (*expenses.ListExpenseResponse, error) {
-	entities, err := i.ExpenseDAO.Query(ctx,
-		query.Offset(req.Offset),
-		query.Limit(req.Limit),
-	)
+	filters := []query.Query{
+		query.OrderBy("id", false),
+	}
+	if req.Offset > 0 {
+		filters = append(filters, query.Offset(req.Offset))
+	}
+
+	if req.Limit > 0 {
+		filters = append(filters, query.Limit(req.Limit))
+	}
+	entities, err := i.ExpenseDAO.Query(ctx, filters...)
 
 	if err != nil {
 		return nil, err
@@ -101,8 +108,11 @@ func entityToExpense(entity *storage.Expense) *expenses.Expense {
 	}
 
 	return &expenses.Expense{
-		ID:   entity.ID,
-		Name: entity.Name,
+		ID:       entity.ID,
+		Category: entity.Category,
+		Currency: entity.Currency,
+		Amount:   entity.Amount,
+		Date:     entity.Date,
 	}
 }
 
@@ -112,7 +122,10 @@ func entityFromExpense(item *expenses.Expense) *storage.Expense {
 	}
 
 	return &storage.Expense{
-		ID:   item.ID,
-		Name: item.Name,
+		ID:       item.ID,
+		Category: item.Category,
+		Currency: item.Currency,
+		Amount:   item.Amount,
+		Date:     item.Date,
 	}
 }

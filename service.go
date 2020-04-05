@@ -1,6 +1,9 @@
 package expenses
 
-import "context"
+import (
+	"context"
+	"time"
+)
 
 // Service is a simple interface for a service.
 type Service interface {
@@ -30,6 +33,9 @@ type ByeResponse struct {
 
 // Expense ...
 type Expense struct {
-	ID   int64  `json:"id"`
-	Name string `json:"name"`
+	ID       int64     `json:"id"`
+	Category string    `json:"category"`
+	Currency string    `json:"currency"`
+	Amount   float64   `json:"amount"`
+	Date     time.Time `json:"date"`
 }

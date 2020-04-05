@@ -21,7 +21,10 @@ func InitDB() *gorm.DB {
 //go:generate gokit entity -name Expense
 type Expense struct {
 	ID        int64     `gorm:"primary_key"`
-	Name      string    `gorm:"varchar(100);not null"`
+	Category  string    `gorm:"varchar(100);not null"`
+	Currency  string    `gorm:"varchar(3);not null"`
+	Amount    float64   `gorm:"not null"`
+	Date      time.Time `gorm:"not null"`
 	CreatedAt time.Time `gorm:"not null"`
 	UpdatedAt time.Time `gorm:"not null"`
 }

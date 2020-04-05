@@ -7,11 +7,15 @@ import (
 	"github.com/bongnv/expenses/internal/handlers"
 	"github.com/bongnv/expenses/internal/service"
 	gokitServer "github.com/bongnv/gokit/util/server"
+	"github.com/rs/cors"
 )
 
 func main() {
 	opts := []gokitServer.Option{
 		gokitServer.WithHTTPAddress(":8080"),
+		gokitServer.WithCORS(cors.Options{
+			AllowedOrigins: []string{"http://localhost:8081"},
+		}),
 	}
 
 	mainHandler := handlers.New()
