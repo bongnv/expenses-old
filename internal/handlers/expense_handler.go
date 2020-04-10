@@ -109,6 +109,7 @@ func entityToExpense(entity *storage.Expense) *expenses.Expense {
 
 	return &expenses.Expense{
 		ID:       entity.ID,
+		Account:  entity.Account,
 		Category: entity.Category,
 		Currency: entity.Currency,
 		Amount:   entity.Amount,
@@ -123,6 +124,7 @@ func entityFromExpense(item *expenses.Expense) *storage.Expense {
 
 	return &storage.Expense{
 		ID:       item.ID,
+		Account:  item.Account,
 		Category: item.Category,
 		Currency: item.Currency,
 		Amount:   item.Amount,
