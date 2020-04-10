@@ -1,5 +1,0 @@
-{
-    "title": "Expenses Management",
-    "description": "Managing your expenses.",
-    "apiServer": "http://localhost:8080/"
-  }
