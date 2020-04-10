@@ -38,4 +38,5 @@ type Expense struct {
 	Currency string    `json:"currency"`
 	Amount   float64   `json:"amount"`
 	Date     time.Time `json:"date"`
+	Account  string    `json:"account"`
 }
